@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 font-sans antialiased;
+  }
+
+  ::selection {
+    @apply bg-primary/20 text-slate-900;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply py-16 sm:py-20;
+  }
+
+  .heading-2 {
+    @apply text-3xl sm:text-4xl font-semibold text-slate-900;
+  }
+
+  .subheading {
+    @apply mt-4 text-base sm:text-lg text-slate-600;
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent;
+  }
+
+  .glass {
+    @apply bg-white/70 backdrop-blur-lg border border-white/60;
+  }
+}

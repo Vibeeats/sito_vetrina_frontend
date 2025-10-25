@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 24" role="img" aria-labelledby="title">
+  <title id="title">VibeEats logo</title>
+  <defs>
+    <linearGradient id="brand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6E59F5" />
+      <stop offset="100%" stop-color="#8B7BFF" />
+    </linearGradient>
+  </defs>
+  <path fill="url(#brand)" d="M7 3h4.2L16 17.4 20.8 3h4.2l-7 18h-4l-7-18Z" />
+  <circle cx="33" cy="12" r="9" fill="none" stroke="url(#brand)" stroke-width="3" />
+  <path fill="url(#brand)" d="M47 3h4.1l3 9.1L57.1 3H61l-5 18h-3.8L47 3Z" />
+</svg>

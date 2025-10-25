@@ -1,0 +1,31 @@
+{
+  "name": "sito_vetrina_frontend",
+  "version": "0.0.2",
+  "private": true,
+  "type": "module",
+  "homepage": "https://Vibeeats.github.io/sito_vetrina_frontend/",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "dependencies": {
+    "framer-motion": "^11.2.9",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "@types/react": "^18.3.8",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.20",
+    "gh-pages": "^6.0.0",
+    "postcss": "^8.4.45",
+    "tailwindcss": "^3.4.13",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.11"
+  }
+}

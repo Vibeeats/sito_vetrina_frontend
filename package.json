@@ -1,16 +1,16 @@
 {
-  "name": "sito_vetrina_frontend",
-  "version": "0.0.2",
-  "private": true,
-  "type": "module",
-  "homepage": "https://Vibeeats.github.io/sito_vetrina_frontend/",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
-  },
+"name": "vibeeats.ai",
+"version": "0.0.2",
+"private": true,
+"type": "module",
+"homepage": "https://vibeeats.ai/",
+"scripts": {
+  "dev": "vite",
+  "build": "tsc && vite build",
+  "preview": "vite preview",
+  "predeploy": "npm run build && echo vibeeats.ai > dist/CNAME",
+  "deploy": "gh-pages -d dist -m \"deploy $(date)\""
+},
   "dependencies": {
     "framer-motion": "^11.2.9",
     "react": "^18.3.1",

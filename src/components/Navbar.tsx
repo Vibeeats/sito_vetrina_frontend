@@ -5,24 +5,17 @@ import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion';
 import { scrollToId } from '../utils/scrollTo';
 import { cn } from '../utils/cn';
 import { fadeInUp, hoverSpring } from '../lib/animations';
+import type { LucideIcon } from 'lucide-react';
+import { Menu, X, Home, ChefHat, Sparkles, HeartHandshake, BarChart3, Mail } from 'lucide-react';
 
-const navItems = [
-  { id: 'home', label: 'Home' },
-  { id: 'cosa-facciamo', label: 'Cosa facciamo' },
-  { id: 'cosa-proponiamo', label: 'Cosa proponiamo' },
-  { id: 'perche-vibeeats', label: 'Perché VibeEats' },
-  { id: 'kpi', label: 'KPI' },
-  { id: 'contatti', label: 'Contatti' }
+const navItems: { id: string; label: string; icon: LucideIcon }[] = [
+  { id: 'home', label: 'Home', icon: Home },
+  { id: 'cosa-facciamo', label: 'Cosa facciamo', icon: ChefHat },
+  { id: 'cosa-proponiamo', label: 'Cosa proponiamo', icon: Sparkles },
+  { id: 'perche-vibeeats', label: 'Perché VibeEats', icon: HeartHandshake },
+  { id: 'kpi', label: 'KPI', icon: BarChart3 },
+  { id: 'contatti', label: 'Contatti', icon: Mail }
 ];
-
-const menuVariants: Variants = {
-  hidden: { opacity: 0, y: -16 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.35, ease: 'easeOut', staggerChildren: 0.05 }
-  }
-};
 
 const linkVariants: Variants = {
   hidden: { opacity: 0, y: 8 },
@@ -133,46 +126,85 @@ const Navbar = () => {
         </nav>
         <motion.button
           type="button"
-          className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-accent/40 bg-surface/90 text-secondary shadow-soft transition lg:hidden"
+          className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-accent/40 bg-gradient-to-br from-primary/85 via-secondary/80 to-primary/70 text-white shadow-soft transition lg:hidden"
           onClick={() => setIsOpen((prev) => !prev)}
           aria-label={isOpen ? 'Chiudi menu di navigazione' : 'Apri menu di navigazione'}
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3, ease: 'easeOut' }}
+          whileHover={{ scale: prefersReducedMotion ? 1 : 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
           <span className="sr-only">Menu</span>
-          <svg className="h-5 w-5" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8" fill="none">
-            {isOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 6 18 18M18 6 6 18" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 7h16M4 12h16M4 17h12" />
-            )}
-          </svg>
+          {isOpen ? (
+            <X className="h-5 w-5" strokeWidth={1.6} aria-hidden="true" />
+          ) : (
+            <Menu className="h-5 w-5" strokeWidth={1.6} aria-hidden="true" />
+          )}
         </motion.button>
       </div>
       <AnimatePresence>
         {isOpen && (
-          <motion.nav
-            initial={prefersReducedMotion ? false : 'hidden'}
-            animate="show"
-            exit="hidden"
-            variants={prefersReducedMotion ? undefined : menuVariants}
-            className="lg:hidden"
-          >
-            <ul className="mx-4 mb-4 flex flex-col gap-3 rounded-3xl border border-accent/50 bg-surface/95 p-5 shadow-soft backdrop-blur text-base">
-              {navItems.map((item) => (
-                <motion.li key={item.id} variants={prefersReducedMotion ? undefined : linkVariants}>
-                  <a
-                    href={`#${item.id}`}
-                    onClick={handleNavigate(item.id)}
-                    className="block rounded-2xl px-4 py-3 text-sm font-semibold text-muted transition hover:bg-accent/40 hover:text-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          <>
+            <motion.div
+              key="nav-backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-40 bg-secondary/40 backdrop-blur-sm lg:hidden"
+              onClick={() => setIsOpen(false)}
+            />
+            <motion.nav
+              key="nav-panel"
+              initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: -16 }}
+              animate={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+              exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: -16 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+              className="fixed inset-x-4 top-[88px] z-50 lg:hidden"
+            >
+              <div className="rounded-3xl border border-accent/40 bg-gradient-to-br from-surface via-white to-surface/90 p-5 shadow-hover">
+                <div className="mb-4 flex items-center justify-between">
+                  <span className="text-xs font-semibold uppercase tracking-[0.3em] text-muted">Menu</span>
+                  <button
+                    type="button"
+                    onClick={() => setIsOpen(false)}
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-accent/30 text-primary transition hover:bg-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    aria-label="Chiudi menu mobile"
                   >
-                    {item.label}
-                  </a>
-                </motion.li>
-              ))}
-            </ul>
-          </motion.nav>
+                    <X className="h-4 w-4" aria-hidden="true" />
+                  </button>
+                </div>
+                <ul className="flex flex-col gap-3">
+                  {navItems.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <motion.li
+                        key={item.id}
+                        initial={prefersReducedMotion ? false : 'hidden'}
+                        animate={prefersReducedMotion ? undefined : 'show'}
+                        exit={prefersReducedMotion ? undefined : 'hidden'}
+                        variants={prefersReducedMotion ? undefined : linkVariants}
+                        whileHover={prefersReducedMotion ? undefined : { x: 4 }}
+                        transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+                      >
+                        <a
+                          href={`#${item.id}`}
+                          onClick={handleNavigate(item.id)}
+                          className="flex items-center gap-4 rounded-2xl bg-white/85 px-4 py-3 text-sm font-semibold text-secondary shadow-soft transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                        >
+                          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent/20 text-primary">
+                            <Icon className="h-4 w-4" aria-hidden="true" />
+                          </span>
+                          <span>{item.label}</span>
+                        </a>
+                      </motion.li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </motion.nav>
+          </>
         )}
       </AnimatePresence>
     </motion.header>

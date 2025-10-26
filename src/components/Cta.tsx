@@ -10,9 +10,9 @@ const Cta = () => {
       <Container>
         <MotionInView
           variants={scaleIn}
-          className="relative overflow-hidden rounded-[2.75rem] bg-gradient-to-r from-primary via-primary/80 to-primary/60 px-6 py-16 text-center text-white shadow-soft sm:px-12"
+          className="relative overflow-hidden rounded-[2.75rem] bg-gradient-to-r from-primary via-secondary to-muted px-6 py-16 text-center text-white shadow-soft sm:px-12"
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.4),transparent_55%)] opacity-60" aria-hidden="true" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(249,245,235,0.35),transparent_55%)] opacity-60" aria-hidden="true" />
           <div className="relative flex flex-col items-center gap-6">
             <h2 id="cta-title" className="text-3xl font-semibold sm:text-4xl">
               Porta il tuo ristorante al livello successivo
@@ -25,7 +25,7 @@ const Cta = () => {
               <Button href="#contatti" aria-label="Richiedi una demo di VibeEats">
                 Richiedi una demo
               </Button>
-              <Button href="mailto:hello@vibeeats.com" variant="secondary" aria-label="Scrivici via email">
+              <Button href="mailto:info@vibeeats.ai" variant="secondary" aria-label="Scrivici via email">
                 Scrivici
               </Button>
             </div>

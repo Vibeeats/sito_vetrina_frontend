@@ -42,17 +42,17 @@ const KpiCard = ({ metric }: KpiCardProps) => {
   return (
     <MotionInView
       variants={scaleIn}
-      className="flex h-full flex-col justify-between rounded-3xl border border-primary/20 bg-white/90 p-8 text-left shadow-soft"
+      className="flex h-full flex-col justify-between rounded-3xl border border-accent/30 bg-white p-8 text-left shadow-soft"
       onViewportEnter={start}
     >
       <div>
-        <span className="text-xs font-semibold uppercase tracking-wide text-primary/70">{metric.label}</span>
-        <p className="mt-5 text-4xl font-semibold text-slate-900">
+        <span className="text-xs font-semibold uppercase tracking-wide text-primary/80">{metric.label}</span>
+        <p className="mt-5 text-4xl font-semibold text-secondary">
           {metric.prefix}
           {value}
           {metric.suffix}
         </p>
-        <p className="mt-3 text-sm leading-relaxed text-slate-600">{metric.description}</p>
+        <p className="mt-3 text-sm leading-relaxed text-muted">{metric.description}</p>
       </div>
     </MotionInView>
   );

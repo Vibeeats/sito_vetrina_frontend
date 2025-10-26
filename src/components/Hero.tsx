@@ -36,20 +36,20 @@ const Hero = () => {
           transition={blobTransition}
         />
         <motion.div
-          className="absolute bottom-12 right-16 h-72 w-72 rounded-full bg-primary/15 blur-3xl"
+          className="absolute bottom-12 right-16 h-72 w-72 rounded-full bg-accent/50 blur-3xl"
           animate={prefersReducedMotion ? undefined : { y: ['0%', '8%', '0%'], x: ['0%', '-4%', '0%'] }}
           transition={{ ...blobTransition, duration: 18 }}
         />
       </div>
 
       <Container className="relative">
-        <MotionInView variants={staggerContainer} className="flex flex-col items-center text-center">
-          <MotionInView variants={fadeInUp} className="rounded-full border border-primary/30 bg-primary/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+        <MotionInView variants={staggerContainer} className="flex flex-col items-center text-center pt-16 sm:pt-20">
+          <MotionInView variants={fadeInUp} className="rounded-full border border-primary/40 bg-primary/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
             VibeEats
           </MotionInView>
 
           <motion.h1
-            className="mt-8 flex max-w-4xl flex-wrap justify-center gap-x-3 gap-y-2 text-center text-4xl font-semibold leading-tight text-slate-900 sm:text-5xl md:text-[3.2rem]"
+            className="mt-8 flex max-w-4xl flex-wrap justify-center gap-x-3 gap-y-2 text-center text-4xl font-semibold leading-tight text-secondary sm:text-5xl md:text-[3.2rem]"
             initial={prefersReducedMotion ? undefined : 'hidden'}
             animate="show"
             variants={staggerContainer}
@@ -66,7 +66,7 @@ const Hero = () => {
             ))}
           </motion.h1>
 
-          <MotionInView variants={fadeInUp} className="mt-6 max-w-3xl text-base text-slate-600 sm:text-lg">
+          <MotionInView variants={fadeInUp} className="mt-6 max-w-3xl text-base text-muted sm:text-lg">
             QR al tavolo, menù digitale con chatbot, ordini e split bill; discovery e prenotazioni fuori-loco; pannello
             ristorante e strumenti di piattaforma.
           </MotionInView>
@@ -87,7 +87,7 @@ const Hero = () => {
         style={{ translateY: prefersReducedMotion ? 0 : parallaxOffset * -0.5 }}
         transition={{ duration: 0.45, ease: 'easeOut' }}
       >
-        <div className="h-40 w-[90%] max-w-4xl rounded-full bg-gradient-to-r from-white/40 via-primary/20 to-white/10 blur-3xl" />
+        <div className="h-40 w-[90%] max-w-4xl rounded-full bg-gradient-to-r from-accent/60 via-primary/15 to-surface/40 blur-3xl" />
       </motion.div>
     </Section>
   );

@@ -1,6 +1,6 @@
 import { MouseEvent, useEffect, useState } from 'react';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
-import logo from '../assets/logo.svg';
+import logo from '../assets/logo-v2.png';
 import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion';
 import { scrollToId } from '../utils/scrollTo';
 import { cn } from '../utils/cn';
@@ -71,7 +71,7 @@ const Navbar = () => {
     if (!isOpen) return;
 
     const onResize = () => {
-      if (window.innerWidth >= 768) {
+      if (window.innerWidth >= 1024) {
         setIsOpen(false);
       }
     };
@@ -94,16 +94,16 @@ const Navbar = () => {
       variants={fadeInUp}
       transition={{ duration: 0.4, ease: 'easeOut' }}
       className={cn(
-        'fixed inset-x-0 top-0 z-50 border-b border-white/40 bg-white/70 backdrop-blur-xl transition-shadow duration-300',
-        isScrolled ? 'shadow-lg shadow-primary/15' : ''
+        'fixed inset-x-0 top-0 z-50 border-b border-accent/40 bg-surface/90 backdrop-blur-xl transition-shadow duration-300',
+        isScrolled ? 'shadow-lg shadow-primary/20' : ''
       )}
     >
-      <div className="mx-auto flex w-full max-w-content items-center justify-between px-4 py-5 sm:px-6">
-        <a href="#home" className="flex items-center gap-3" onClick={handleNavigate('home')} aria-label="Home VibeEats">
-          <img src={logo} alt="Logo VibeEats" className="h-10 w-auto" />
-          <span className="text-xl font-semibold text-slate-900">VibeEats</span>
+      <div className="mx-auto flex w-full max-w-content items-center justify-between px-4 py-6 sm:px-8">
+        <a href="#home" className="flex items-center gap-4" onClick={handleNavigate('home')} aria-label="Home VibeEats">
+          <img src={logo} alt="Logo VibeEats" className="h-12 w-auto sm:h-14" />
+          <span className="text-2xl font-semibold text-secondary">VibeEats</span>
         </a>
-        <nav className="hidden items-center gap-3 md:flex">
+        <nav className="hidden items-center gap-3 text-muted text-sm xl:gap-4 xl:text-base lg:flex">
           {navItems.map((item) => {
             const isActive = activeSection === item.id;
             return (
@@ -112,8 +112,8 @@ const Navbar = () => {
                 href={`#${item.id}`}
                 onClick={handleNavigate(item.id)}
                 className={cn(
-                  'relative overflow-hidden rounded-full px-5 py-2.5 text-sm font-medium text-slate-600 transition-colors',
-                  isActive ? 'text-primary' : 'hover:text-primary'
+                  'relative overflow-hidden rounded-full px-4 py-2 text-sm font-medium transition-colors xl:px-6 xl:py-3',
+                  isActive ? 'text-primary' : 'text-muted hover:text-secondary'
                 )}
                 whileHover={{ scale: prefersReducedMotion ? 1 : 1.02 }}
                 transition={hoverSpring}
@@ -121,7 +121,7 @@ const Navbar = () => {
                 {isActive && (
                   <motion.span
                     layoutId="nav-indicator"
-                    className="absolute inset-0 rounded-full bg-primary/10"
+                    className="absolute inset-0 rounded-full bg-accent/60"
                     transition={{ type: 'spring', stiffness: 320, damping: 28 }}
                     aria-hidden="true"
                   />
@@ -133,7 +133,7 @@ const Navbar = () => {
         </nav>
         <motion.button
           type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/40 bg-white/80 text-slate-700 shadow-soft transition md:hidden"
+          className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-accent/40 bg-surface/90 text-secondary shadow-soft transition lg:hidden"
           onClick={() => setIsOpen((prev) => !prev)}
           aria-label={isOpen ? 'Chiudi menu di navigazione' : 'Apri menu di navigazione'}
           initial={{ opacity: 0, scale: 0.9 }}
@@ -159,13 +159,13 @@ const Navbar = () => {
             variants={prefersReducedMotion ? undefined : menuVariants}
             className="md:hidden"
           >
-            <ul className="mx-4 mb-4 flex flex-col gap-2 rounded-3xl border border-white/60 bg-white/85 p-4 shadow-soft backdrop-blur">
+            <ul className="mx-4 mb-4 flex flex-col gap-3 rounded-3xl border border-accent/50 bg-surface/95 p-5 shadow-soft backdrop-blur text-base">
               {navItems.map((item) => (
                 <motion.li key={item.id} variants={prefersReducedMotion ? undefined : linkVariants}>
                   <a
                     href={`#${item.id}`}
                     onClick={handleNavigate(item.id)}
-                    className="block rounded-2xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-primary/10 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    className="block rounded-2xl px-4 py-3 text-sm font-semibold text-muted transition hover:bg-accent/40 hover:text-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   >
                     {item.label}
                   </a>

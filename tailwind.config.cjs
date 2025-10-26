@@ -4,17 +4,21 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#6E59F5'
+        primary: '#681618',
+        secondary: '#4A2C2A',
+        accent: '#B8C5A5',
+        surface: '#F9F5EB',
+        muted: '#5F706F'
       },
       fontFamily: {
         sans: ['"Inter"', '"Manrope"', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif']
       },
       boxShadow: {
-        soft: '0 18px 40px -20px rgba(110, 89, 245, 0.35)',
-        hover: '0 25px 50px -20px rgba(110, 89, 245, 0.45)'
+        soft: '0 18px 40px -22px rgba(74, 44, 42, 0.25)',
+        hover: '0 25px 55px -24px rgba(104, 22, 24, 0.35)'
       },
       backgroundImage: {
-        'hero-gradient': 'radial-gradient(circle at top left, rgba(110,89,245,0.25), transparent 55%), radial-gradient(circle at bottom right, rgba(110,89,245,0.2), transparent 60%)'
+        'hero-gradient': 'radial-gradient(circle at top left, rgba(104,22,24,0.18), transparent 55%), radial-gradient(circle at bottom right, rgba(184,197,165,0.45), transparent 65%)'
       },
       keyframes: {
         fadeIn: {

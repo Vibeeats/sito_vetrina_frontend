@@ -21,7 +21,7 @@ const baseClasses =
 const variantClasses: Record<ButtonVariant, string> = {
   primary: 'bg-primary text-white shadow-soft hover:bg-primary/90 focus-visible:ring-primary',
   secondary:
-    'bg-white/90 text-primary border border-primary/40 shadow-soft backdrop-blur focus-visible:ring-primary hover:bg-white'
+    'bg-accent text-secondary border border-accent/40 shadow-soft backdrop-blur hover:bg-accent/90 focus-visible:ring-primary'
 };
 
 const MotionButton = motion.button;

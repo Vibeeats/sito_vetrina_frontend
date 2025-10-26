@@ -3,31 +3,49 @@ import Container from './Container';
 import MotionInView from './MotionInView';
 import { fadeInUp, slideInY, staggerContainer } from '../lib/animations';
 
+import Icon from './Icon';
+import { Timer, ShieldCheck, Smile } from 'lucide-react';
+
 const evidences = [
   {
     title: 'Meno attriti e tempi d’attesa',
     description:
-      'Flow guidati e self-service controllato abbattono code al conto e tempo tra seduta e primo ordine.'
+      'Flow guidati e self-service controllato abbattono code al conto e tempo tra seduta e primo ordine.',
+    icon: (
+      <Icon>
+        <Timer className="h-5 w-5" aria-hidden="true" />
+      </Icon>
+    )
   },
   {
     title: 'Scelte consapevoli e inclusive',
     description:
-      'Allergeni, diete e preferenze sono sempre visibili e filtrabili, con suggerimenti contestuali del chatbot.'
+      'Allergeni, diete e preferenze sono sempre visibili e filtrabili, con suggerimenti contestuali del chatbot.',
+    icon: (
+      <Icon>
+        <ShieldCheck className="h-5 w-5" aria-hidden="true" />
+      </Icon>
+    )
   },
   {
     title: 'Servizio migliore e personalizzato',
     description:
-      'Team di sala informato in tempo reale, insight su preferenze e feedback immediato chiudono il loop di servizio.'
+      'Team di sala informato in tempo reale, insight su preferenze e feedback immediato chiudono il loop di servizio.',
+    icon: (
+      <Icon>
+        <Smile className="h-5 w-5" aria-hidden="true" />
+      </Icon>
+    )
   }
 ];
 
 const Why = () => {
   return (
-    <div className="relative bg-gradient-to-b from-white to-slate-50">
-      <div className="absolute inset-x-0 -top-20 overflow-hidden" aria-hidden="true">
-        <svg className="h-24 w-full text-slate-50" viewBox="0 0 1440 160" preserveAspectRatio="none">
-          <path fill="currentColor" d="M0 160V40c120-32 240-48 360-40s240 40 360 40 240-32 360-40 240 8 360 40v120H0Z" />
-        </svg>
+    <div className="relative bg-gradient-to-b from-surface to-accent/30 py-14 sm:py-16">
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute left-6 top-16 h-40 w-40 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute right-10 bottom-10 h-48 w-48 rounded-full bg-accent/30 blur-3xl" />
+        <div className="absolute inset-x-0 top-1/3 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
       </div>
       <Section id="perche-vibeeats" className="relative">
         <Container>
@@ -45,20 +63,21 @@ const Why = () => {
               <MotionInView
                 key={item.title}
                 variants={slideInY}
-                className="rounded-3xl border border-primary/15 bg-white/90 p-6 text-left shadow-soft"
+                className="group relative overflow-hidden rounded-3xl border border-accent/30 bg-white p-6 text-left shadow-soft transition-transform duration-300 hover:-translate-y-1"
               >
-                <h3 className="text-lg font-semibold text-slate-900">{item.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-slate-600">{item.description}</p>
+                <span className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden="true" />
+                <div className="relative flex items-start gap-4">
+                  <div className="shrink-0">{item.icon}</div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-secondary">{item.title}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-muted">{item.description}</p>
+                  </div>
+                </div>
               </MotionInView>
             ))}
           </MotionInView>
         </Container>
       </Section>
-      <div className="absolute inset-x-0 -bottom-24 overflow-hidden" aria-hidden="true">
-        <svg className="h-24 w-full text-slate-50" viewBox="0 0 1440 160" preserveAspectRatio="none">
-          <path fill="currentColor" d="M0 0v120c120 32 240 48 360 40s240-40 360-40 240 32 360 40 240-8 360-40V0H0Z" />
-        </svg>
-      </div>
     </div>
   );
 };

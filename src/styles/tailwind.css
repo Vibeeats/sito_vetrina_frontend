@@ -8,11 +8,11 @@
   }
 
   body {
-    @apply bg-slate-50 text-slate-900 font-sans antialiased;
+    @apply bg-white text-secondary font-sans antialiased;
   }
 
   ::selection {
-    @apply bg-primary/20 text-slate-900;
+    @apply bg-primary/30 text-secondary;
   }
 }
 
@@ -22,11 +22,11 @@
   }
 
   .heading-2 {
-    @apply text-3xl sm:text-4xl font-semibold text-slate-900;
+    @apply text-3xl sm:text-4xl font-semibold text-secondary;
   }
 
   .subheading {
-    @apply mt-4 text-base sm:text-lg text-slate-600;
+    @apply mt-4 text-base sm:text-lg text-muted;
   }
 }
 
@@ -36,6 +36,6 @@
   }
 
   .glass {
-    @apply bg-white/70 backdrop-blur-lg border border-white/60;
+    @apply bg-surface/80 backdrop-blur-lg border border-accent/60;
   }
 }

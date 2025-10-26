@@ -87,35 +87,48 @@ const Navbar = () => {
       variants={fadeInUp}
       transition={{ duration: 0.4, ease: 'easeOut' }}
       className={cn(
-        'fixed inset-x-0 top-0 z-50 overflow-hidden border-b border-accent/40 bg-surface/90 backdrop-blur-2xl transition-shadow duration-300',
+        'fixed inset-x-0 top-0 z-50 border-b border-accent/40 bg-surface/90 backdrop-blur-2xl transition-shadow duration-300',
         isScrolled ? 'shadow-lg shadow-primary/20' : ''
       )}
     >
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-surface via-white/90 to-surface/80" />
+        <div className="absolute inset-0 bg-gradient-to-br from-surface via-white to-surface/85" />
         <motion.div
-          className="absolute -top-24 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-primary/40 blur-[100px] opacity-95"
+          className="pointer-events-none absolute inset-0 opacity-85 mix-blend-screen"
+          style={{
+            backgroundImage:
+              'radial-gradient(85% 115% at 12% 22%, rgba(104,22,24,0.35), transparent 65%), radial-gradient(90% 110% at 88% 45%, rgba(184,197,165,0.55), transparent 70%)',
+            backgroundSize: '160% 160%'
+          }}
           animate={
-            prefersReducedMotion ? undefined : { x: ['-35%', '35%', '-35%'], y: ['-15%', '20%', '-15%'] }
+            prefersReducedMotion
+              ? undefined
+              : { backgroundPosition: ['0% 0%', '100% 60%', '0% 0%'] }
           }
           transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
-          className="absolute top-1/2 left-0 h-32 w-32 -translate-y-1/2 rounded-full bg-accent/90 blur-[70px] opacity-90"
+          className="pointer-events-none absolute inset-0 opacity-45 mix-blend-screen"
+          style={{
+            backgroundImage:
+              'repeating-linear-gradient(115deg, rgba(255,255,255,0.0) 0px, rgba(255,255,255,0.0) 36px, rgba(104,22,24,0.18) 36px, rgba(104,22,24,0.18) 42px)'
+          }}
           animate={
-            prefersReducedMotion ? undefined : { x: ['-10%', '550%', '-10%'], scale: [0.9, 1.1, 0.9] }
+            prefersReducedMotion
+              ? undefined
+              : { backgroundPosition: ['0px 0px', '240px 180px', '0px 0px'] }
           }
-          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+          transition={{ duration: 22, repeat: Infinity, ease: 'linear' }}
         />
         <motion.div
-          className="absolute inset-y-[-35%] left-[-25%] w-[65%] bg-gradient-to-r from-primary/0 via-primary/45 to-primary/0 opacity-75 blur-xl"
-          animate={prefersReducedMotion ? undefined : { x: ['-20%', '125%', '-20%'] }}
+          className="pointer-events-none absolute inset-y-[-38%] left-[-35%] w-[70%] bg-gradient-to-r from-transparent via-primary/55 to-transparent opacity-75 blur-2xl"
+          animate={prefersReducedMotion ? undefined : { x: ['-25%', '120%', '-25%'] }}
           transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
-          className="absolute inset-y-[-40%] left-1/2 h-[220%] w-[24%] -translate-x-1/2 rounded-full bg-gradient-to-b from-white/0 via-white/65 to-white/10 opacity-80 blur-3xl"
-          animate={prefersReducedMotion ? undefined : { rotate: [-12, 12, -12] }}
-          transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }}
+          className="pointer-events-none absolute inset-y-[-45%] left-1/2 h-[230%] w-[26%] -translate-x-1/2 rounded-full bg-gradient-to-b from-white/10 via-white/75 to-white/10 opacity-75 blur-[90px]"
+          animate={prefersReducedMotion ? undefined : { rotate: [-15, 15, -15] }}
+          transition={{ duration: 24, repeat: Infinity, ease: 'easeInOut' }}
         />
       </div>
       <motion.div

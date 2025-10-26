@@ -8,6 +8,7 @@ import Card from './Card';
 import Icon from './Icon';
 import { fadeInUp, staggerContainer } from '../lib/animations';
 import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion';
+import useIsMobile from '../hooks/useIsMobile';
 
 type ModuleDefinition = {
   title: string;
@@ -77,13 +78,15 @@ const modules: ModuleDefinition[] = [
 
 const Modules = () => {
   const prefersReducedMotion = usePrefersReducedMotion();
+  const isMobile = useIsMobile();
+  const shouldReduceMotion = prefersReducedMotion || isMobile;
   return (
     <Section id="cosa-proponiamo" className="ai-section relative">
       <motion.div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 bg-ai-grid opacity-40"
         animate={
-          prefersReducedMotion
+          shouldReduceMotion
             ? undefined
             : { backgroundPosition: ['0% 100%', '100% 0%', '0% 100%'] }
         }
@@ -94,7 +97,7 @@ const Modules = () => {
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-6 top-24 h-[70%] rounded-full border border-accent/20"
         initial={{ opacity: 0, scaleY: 0.8 }}
-        animate={prefersReducedMotion ? { opacity: 0.35, scaleY: 1 } : { opacity: [0.15, 0.4, 0.25], scaleY: [0.82, 1, 0.9] }}
+        animate={shouldReduceMotion ? { opacity: 0.35, scaleY: 1 } : { opacity: [0.15, 0.4, 0.25], scaleY: [0.82, 1, 0.9] }}
         transition={{ duration: 16, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
       />
       <Container>
@@ -107,11 +110,19 @@ const Modules = () => {
           </MotionInView>
         </div>
 
-        <MotionInView variants={staggerContainer} className="mt-12 grid gap-6 md:grid-cols-2">
-          {modules.map((module) => (
-            <ModuleCard key={module.title} module={module} prefersReducedMotion={prefersReducedMotion} />
-          ))}
-        </MotionInView>
+        {shouldReduceMotion ? (
+          <div className="mt-12 grid gap-6 md:grid-cols-2">
+            {modules.map((module) => (
+              <ModuleCard key={module.title} module={module} shouldReduceMotion={shouldReduceMotion} />
+            ))}
+          </div>
+        ) : (
+          <MotionInView variants={staggerContainer} className="mt-12 grid gap-6 md:grid-cols-2">
+            {modules.map((module) => (
+              <ModuleCard key={module.title} module={module} shouldReduceMotion={shouldReduceMotion} />
+            ))}
+          </MotionInView>
+        )}
       </Container>
     </Section>
   );
@@ -119,20 +130,21 @@ const Modules = () => {
 
 type ModuleCardProps = {
   module: ModuleDefinition;
-  prefersReducedMotion: boolean;
+  shouldReduceMotion: boolean;
 };
 
-const ModuleCard = ({ module, prefersReducedMotion }: ModuleCardProps) => {
+const ModuleCard = ({ module, shouldReduceMotion }: ModuleCardProps) => {
   const rotateX = useMotionValue(0);
   const rotateY = useMotionValue(0);
 
   const resetTilt = () => {
+    if (shouldReduceMotion) return;
     rotateX.set(0);
     rotateY.set(0);
   };
 
   const handleMove = (event: MouseEvent<HTMLDivElement>) => {
-    if (prefersReducedMotion) return;
+    if (shouldReduceMotion) return;
     const bounds = event.currentTarget.getBoundingClientRect();
     const x = event.clientX - bounds.left;
     const y = event.clientY - bounds.top;
@@ -145,20 +157,22 @@ const ModuleCard = ({ module, prefersReducedMotion }: ModuleCardProps) => {
 
   return (
     <Card
-      variants={fadeInUp}
-      whileHover={{ scale: prefersReducedMotion ? 1 : 1.04 }}
-      transition={{ type: 'spring', stiffness: 220, damping: 26 }}
-      style={{ rotateX, rotateY, transformPerspective: 900 }}
-      onMouseMove={handleMove}
-      onMouseLeave={resetTilt}
+      variants={shouldReduceMotion ? undefined : fadeInUp}
+      whileHover={shouldReduceMotion ? undefined : { scale: 1.04 }}
+      transition={shouldReduceMotion ? undefined : { type: 'spring', stiffness: 220, damping: 26 }}
+      style={shouldReduceMotion ? undefined : { rotateX, rotateY, transformPerspective: 900 }}
+      onMouseMove={shouldReduceMotion ? undefined : handleMove}
+      onMouseLeave={shouldReduceMotion ? undefined : resetTilt}
       className="hover:shadow-hover"
     >
       <motion.span
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-8 top-6 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent"
         initial={{ opacity: 0, scaleX: 0.5 }}
-        animate={prefersReducedMotion ? { opacity: 0.45, scaleX: 1 } : { opacity: [0.2, 0.6, 0.3], scaleX: [0.6, 1, 0.8] }}
-        transition={{ duration: 12, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
+        animate={shouldReduceMotion ? { opacity: 0.45, scaleX: 1 } : { opacity: [0.2, 0.6, 0.3], scaleX: [0.6, 1, 0.8] }}
+        transition={
+          shouldReduceMotion ? { duration: 0.6, ease: 'easeOut' } : { duration: 12, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }
+        }
       />
       <div className="flex items-start gap-4">
         {module.icon}

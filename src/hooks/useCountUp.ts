@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import usePrefersReducedMotion from './usePrefersReducedMotion';
+import useIsMobile from './useIsMobile';
 
 type UseCountUpOptions = {
   to: number;
@@ -18,8 +19,10 @@ const defaultFormat = (value: number) => Math.round(value).toLocaleString('it-IT
 
 const useCountUp = ({ to, duration = 1200, format = defaultFormat }: UseCountUpOptions): UseCountUpResult => {
   const prefersReduced = usePrefersReducedMotion();
-  const [displayValue, setDisplayValue] = useState(() => format(prefersReduced ? to : 0));
-  const hasAnimatedRef = useRef(prefersReduced);
+  const isMobile = useIsMobile();
+  const shouldReduce = prefersReduced || isMobile;
+  const [displayValue, setDisplayValue] = useState(() => format(shouldReduce ? to : 0));
+  const hasAnimatedRef = useRef(shouldReduce);
   const rafRef = useRef<number>();
   const startTimeRef = useRef<number>();
 
@@ -33,9 +36,9 @@ const useCountUp = ({ to, duration = 1200, format = defaultFormat }: UseCountUpO
 
   const reset = useCallback(() => {
     cancel();
-    hasAnimatedRef.current = prefersReduced;
-    setDisplayValue(format(prefersReduced ? to : 0));
-  }, [cancel, format, prefersReduced, to]);
+    hasAnimatedRef.current = shouldReduce;
+    setDisplayValue(format(shouldReduce ? to : 0));
+  }, [cancel, format, shouldReduce, to]);
 
   const step = useCallback(
     (timestamp: number) => {
@@ -59,25 +62,25 @@ const useCountUp = ({ to, duration = 1200, format = defaultFormat }: UseCountUpO
   );
 
   const start = useCallback(() => {
-    if (hasAnimatedRef.current || prefersReduced) {
+    if (hasAnimatedRef.current || shouldReduce) {
       setDisplayValue(format(to));
       hasAnimatedRef.current = true;
       return;
     }
     cancel();
     rafRef.current = requestAnimationFrame(step);
-  }, [cancel, format, prefersReduced, step, to]);
+  }, [cancel, format, shouldReduce, step, to]);
 
   useEffect(() => reset, [reset]);
 
   useEffect(() => {
-    if (prefersReduced) {
+    if (shouldReduce) {
       cancel();
       hasAnimatedRef.current = true;
       setDisplayValue(format(to));
     }
     return cancel;
-  }, [cancel, format, prefersReduced, to]);
+  }, [cancel, format, shouldReduce, to]);
 
   return { value: displayValue, start, reset, hasAnimated: hasAnimatedRef.current };
 };

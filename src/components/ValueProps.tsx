@@ -7,6 +7,7 @@ import Card from './Card';
 import Icon from './Icon';
 import { fadeInUp, perspectiveFade, staggerContainer } from '../lib/animations';
 import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion';
+import useIsMobile from '../hooks/useIsMobile';
 
 const valueProps = [
   {
@@ -49,6 +50,8 @@ const valueProps = [
 
 const ValueProps = () => {
   const prefersReducedMotion = usePrefersReducedMotion();
+  const isMobile = useIsMobile();
+  const shouldReduceMotion = prefersReducedMotion || isMobile;
 
   return (
     <Section id="cosa-facciamo" className="ai-section relative">
@@ -56,7 +59,7 @@ const ValueProps = () => {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 bg-ai-grid opacity-40"
         animate={
-          prefersReducedMotion
+          shouldReduceMotion
             ? undefined
             : { backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'] }
         }
@@ -67,7 +70,7 @@ const ValueProps = () => {
         aria-hidden="true"
         className="pointer-events-none absolute left-1/2 top-28 hidden h-[65%] w-px -translate-x-1/2 bg-gradient-to-b from-primary/0 via-primary/40 to-primary/0 sm:block"
         initial={{ opacity: 0 }}
-        animate={prefersReducedMotion ? { opacity: 0.35 } : { opacity: [0.1, 0.45, 0.25] }}
+        animate={shouldReduceMotion ? { opacity: 0.35 } : { opacity: [0.1, 0.45, 0.25] }}
         transition={{ duration: 18, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
       />
 
@@ -81,25 +84,41 @@ const ValueProps = () => {
           </MotionInView>
         </div>
 
-        <MotionInView variants={staggerContainer} className="mt-12 grid gap-6 sm:grid-cols-2">
-          {valueProps.map((item) => (
-            <Card
-              key={item.title}
-              variants={perspectiveFade}
-              whileHover={{ y: -8, scale: prefersReducedMotion ? 1 : 1.02 }}
-              transition={{ type: 'spring', stiffness: 220, damping: 24 }}
-              className="hover:shadow-hover"
-            >
-              <div className="flex items-start gap-4">
-                {item.icon}
-                <div>
-                  <h3 className="text-lg font-semibold text-secondary">{item.title}</h3>
-                  <p className="mt-3 text-sm text-muted">{item.subtitle}</p>
+        {shouldReduceMotion ? (
+          <div className="mt-12 grid gap-6 sm:grid-cols-2">
+            {valueProps.map((item) => (
+              <Card key={item.title} className="hover:shadow-hover">
+                <div className="flex items-start gap-4">
+                  {item.icon}
+                  <div>
+                    <h3 className="text-lg font-semibold text-secondary">{item.title}</h3>
+                    <p className="mt-3 text-sm text-muted">{item.subtitle}</p>
+                  </div>
                 </div>
-              </div>
-            </Card>
-          ))}
-        </MotionInView>
+              </Card>
+            ))}
+          </div>
+        ) : (
+          <MotionInView variants={staggerContainer} className="mt-12 grid gap-6 sm:grid-cols-2">
+            {valueProps.map((item) => (
+              <Card
+                key={item.title}
+                variants={perspectiveFade}
+                whileHover={{ y: -8, scale: 1.02 }}
+                transition={{ type: 'spring', stiffness: 220, damping: 24 }}
+                className="hover:shadow-hover"
+              >
+                <div className="flex items-start gap-4">
+                  {item.icon}
+                  <div>
+                    <h3 className="text-lg font-semibold text-secondary">{item.title}</h3>
+                    <p className="mt-3 text-sm text-muted">{item.subtitle}</p>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </MotionInView>
+        )}
       </Container>
     </Section>
   );

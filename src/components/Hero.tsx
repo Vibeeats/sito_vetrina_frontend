@@ -7,7 +7,7 @@ import MotionInView from './MotionInView';
 import { fadeInUp, staggerContainer, staggeredWords, blobTransition } from '../lib/animations';
 import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion';
 
-const headline = 'La piattaforma unificata per l’esperienza ristorante';
+const headline = 'La piattaforma AI unificata per l’esperienza ristorante';
 
 const Hero = () => {
   const prefersReducedMotion = usePrefersReducedMotion();

@@ -8,8 +8,8 @@ import { fadeInUp, staggerContainer } from '../lib/animations';
 
 const valueProps = [
   {
-    title: 'Autonomia al tavolo',
-    subtitle: 'Self-service guidato via QR, con esperienza intuitiva per ogni tavolo.',
+    title: 'Ordini e pagamenti dal tavolo',
+    subtitle: 'Menu via QR, esperienza intuitiva. I clienti ordinano e pagano quando vogliono: lo staff si dedica all’ospitalità.',
     icon: (
       <Icon>
         <Smartphone className="h-5 w-5" aria-hidden="true" />
@@ -17,8 +17,8 @@ const valueProps = [
     )
   },
   {
-    title: 'Meno errori',
-    subtitle: 'Allergeni e diete chiare, regole automatiche e chatbot sempre disponibile.',
+    title: 'Trasparenza, diete e allergeni',
+    subtitle: 'Ingredienti, diete e allergeni sempre visibili. Regole automatiche evitano combinazioni sbagliate',
     icon: (
       <Icon>
         <ShieldCheck className="h-5 w-5" aria-hidden="true" />
@@ -26,8 +26,8 @@ const valueProps = [
     )
   },
   {
-    title: 'Scontrino medio ↑',
-    subtitle: 'Suggerimenti intelligenti e abbinamenti food & wine per alzare il valore medio.',
+    title: 'Scontrino medio in crescita',
+    subtitle: 'Suggerimenti intelligenti e abbinamenti food & wine portano gli extra al momento giusto. Aumento medio: +18%.',
     icon: (
       <Icon>
         <TrendingUp className="h-5 w-5" aria-hidden="true" />
@@ -35,8 +35,8 @@ const valueProps = [
     )
   },
   {
-    title: 'Prenotazioni semplici',
-    subtitle: 'Ricerca, filtri e discovery assistita per trovare e prenotare con zero attriti.',
+    title: 'Prenotazioni in 2 tap',
+    subtitle: 'Ricerca, filtri e conferme automatiche. Dalla scoperta alla prenotazione senza telefonate né attese.',
     icon: (
       <Icon>
         <Search className="h-5 w-5" aria-hidden="true" />
@@ -51,11 +51,10 @@ const ValueProps = () => {
       <Container>
         <div className="mx-auto max-w-3xl text-center">
           <MotionInView variants={fadeInUp}>
-            <h2 className="heading-2">Cosa facciamo</h2>
+            <h2 className="heading-2">Il ristorante, potenziato.</h2>
           </MotionInView>
           <MotionInView variants={fadeInUp} delay={0.1} className="subheading">
-            Un’unica app per l’esperienza ristorante — dal QR al tavolo alla discovery e prenotazione — riducendo
-            attriti, migliorando il servizio e abilitando scelte consapevoli.
+            Dal QR al conto: un’unica app che automatizza ordini, allergeni, pagamenti e prenotazioni. Meno errori, margini che crescono.
           </MotionInView>
         </div>
 

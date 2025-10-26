@@ -18,8 +18,8 @@ type ModuleDefinition = {
 
 const modules: ModuleDefinition[] = [
   {
-    title: 'In-loco via QR',
-    subtitle: 'Esperienza al tavolo con menù dinamico e flussi di pagamento integrati.',
+    title: 'Tavolo Smart',
+    subtitle: 'Dal QR al supporto AI immediato. Fatti consigliare, ordina e pagai in autonomia.',
     bullets: [
       'Menù digitale dinamico: categorie, varianti, allergeni e tag',
       'Chatbot in-loco, ordini e modifiche con stato comanda',
@@ -32,8 +32,8 @@ const modules: ModuleDefinition[] = [
     )
   },
   {
-    title: 'Fuori-loco (Discovery & Prenotazioni)',
-    subtitle: 'Ricerca smart e prenotazioni rapide, anche per gruppi ed eventi.',
+    title: 'Trova & Prenota',
+    subtitle: 'Ricerca per gusti, zona e budget; “Thai per 4 alle 20” diventa confermato in pochi tap.',
     bullets: [
       'Ricerca per cucina, area, budget e preferenze alimentari',
       'Filtri avanzati e chatbot di discovery “Thai per 4 giovedì ore 20”',
@@ -46,8 +46,8 @@ const modules: ModuleDefinition[] = [
     )
   },
   {
-    title: 'Pannello Ristorante',
-    subtitle: 'Gli strumenti per orchestrare sala, menù e relazioni con i clienti.',
+    title: 'Governance',
+    subtitle: 'Visione completa della sala e azioni veloci su ogni tavolo.',
     bullets: [
       'Menù e cataloghi, tavoli, turni e QR personalizzati',
       'Prenotazioni, comande e controllo sala in tempo reale',
@@ -60,8 +60,8 @@ const modules: ModuleDefinition[] = [
     )
   },
   {
-    title: 'Pannello Piattaforma',
-    subtitle: 'Governance e crescita dell’ecosistema VibeEats.',
+    title: 'Data Hub',
+    subtitle: 'Dati unificati, insight quotidiani e suggerimenti data-driven.',
     bullets: [
       'Onboarding ristoranti e tassonomie comuni di cucine e allergeni',
       'Moderazione contenuti e controllo qualità',
@@ -82,11 +82,10 @@ const Modules = () => {
       <Container>
         <div className="mx-auto max-w-3xl text-center">
           <MotionInView variants={fadeInUp}>
-            <h2 className="heading-2">Cosa proponiamo</h2>
+            <h2 className="heading-2">Perché scegliere noi</h2>
           </MotionInView>
           <MotionInView variants={fadeInUp} delay={0.1} className="subheading">
-            Ogni modulo di VibeEats lavora in sinergia per garantire continuità tra esperienza in-loco e discovery
-            digitale, con strumenti di gestione pronti all’uso.
+            Ogni modulo di VibeEats lavora in sinergia per garantire continuità tra esperienza in-loco e discovery digitale, con strumenti di gestione pronti all’uso.
           </MotionInView>
         </div>
 

@@ -157,7 +157,7 @@ const Navbar = () => {
             animate="show"
             exit="hidden"
             variants={prefersReducedMotion ? undefined : menuVariants}
-            className="md:hidden"
+            className="lg:hidden"
           >
             <ul className="mx-4 mb-4 flex flex-col gap-3 rounded-3xl border border-accent/50 bg-surface/95 p-5 shadow-soft backdrop-blur text-base">
               {navItems.map((item) => (

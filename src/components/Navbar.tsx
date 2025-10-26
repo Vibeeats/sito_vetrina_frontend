@@ -1,6 +1,6 @@
 import { MouseEvent, useEffect, useState } from 'react';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
-import logo from '../assets/logo-v2.png';
+import logo from '../assets/logo-v3.png';
 import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion';
 import { scrollToId } from '../utils/scrollTo';
 import { cn } from '../utils/cn';

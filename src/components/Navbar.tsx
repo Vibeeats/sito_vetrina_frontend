@@ -87,7 +87,7 @@ const Navbar = () => {
       variants={fadeInUp}
       transition={{ duration: 0.4, ease: 'easeOut' }}
       className={cn(
-        'fixed inset-x-0 top-0 z-50 border-b border-accent/40 bg-surface/90 backdrop-blur-2xl transition-shadow duration-300',
+        'fixed inset-x-0 top-0 z-50 border-b border-accent/30 bg-surface/5 backdrop-blur-2xl transition-shadow duration-300',
         isScrolled ? 'shadow-lg shadow-primary/20' : ''
       )}
     >

@@ -16,12 +16,13 @@ type ButtonProps = {
 );
 
 const baseClasses =
-  'group relative inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 transition-colors';
+  'ai-button group relative inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 transition-colors';
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary: 'bg-primary text-white shadow-soft hover:bg-primary/90 focus-visible:ring-primary',
+  primary:
+    'bg-gradient-to-r from-primary via-secondary/90 to-primary text-white shadow-soft shadow-primary/20 hover:brightness-[1.05] focus-visible:ring-primary',
   secondary:
-    'bg-accent text-secondary border border-accent/40 shadow-soft backdrop-blur hover:bg-accent/90 focus-visible:ring-primary'
+    'bg-accent/90 text-secondary border border-accent/50 shadow-soft backdrop-blur hover:bg-accent focus-visible:ring-primary'
 };
 
 const MotionButton = motion.button;

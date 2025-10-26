@@ -1,5 +1,5 @@
 import { MouseEvent, ReactNode } from 'react';
-import { useMotionValue } from 'framer-motion';
+import { motion, useMotionValue } from 'framer-motion';
 import { QrCode, MapPin, LayoutDashboard, Settings } from 'lucide-react';
 import Section from './Section';
 import Container from './Container';
@@ -78,7 +78,25 @@ const modules: ModuleDefinition[] = [
 const Modules = () => {
   const prefersReducedMotion = usePrefersReducedMotion();
   return (
-    <Section id="cosa-proponiamo">
+    <Section id="cosa-proponiamo" className="ai-section relative">
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 bg-ai-grid opacity-40"
+        animate={
+          prefersReducedMotion
+            ? undefined
+            : { backgroundPosition: ['0% 100%', '100% 0%', '0% 100%'] }
+        }
+        transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+        style={{ backgroundSize: '360px 360px, 24px 24px, 24px 24px' }}
+      />
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-6 top-24 h-[70%] rounded-full border border-accent/20"
+        initial={{ opacity: 0, scaleY: 0.8 }}
+        animate={prefersReducedMotion ? { opacity: 0.35, scaleY: 1 } : { opacity: [0.15, 0.4, 0.25], scaleY: [0.82, 1, 0.9] }}
+        transition={{ duration: 16, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
+      />
       <Container>
         <div className="mx-auto max-w-3xl text-center">
           <MotionInView variants={fadeInUp}>
@@ -128,13 +146,20 @@ const ModuleCard = ({ module, prefersReducedMotion }: ModuleCardProps) => {
   return (
     <Card
       variants={fadeInUp}
-      whileHover={{ scale: prefersReducedMotion ? 1 : 1.01 }}
-      transition={{ type: 'spring', stiffness: 200, damping: 24 }}
+      whileHover={{ scale: prefersReducedMotion ? 1 : 1.04 }}
+      transition={{ type: 'spring', stiffness: 220, damping: 26 }}
       style={{ rotateX, rotateY, transformPerspective: 900 }}
       onMouseMove={handleMove}
       onMouseLeave={resetTilt}
       className="hover:shadow-hover"
     >
+      <motion.span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-8 top-6 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent"
+        initial={{ opacity: 0, scaleX: 0.5 }}
+        animate={prefersReducedMotion ? { opacity: 0.45, scaleX: 1 } : { opacity: [0.2, 0.6, 0.3], scaleX: [0.6, 1, 0.8] }}
+        transition={{ duration: 12, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
+      />
       <div className="flex items-start gap-4">
         {module.icon}
         <div className="flex-1">
@@ -144,8 +169,8 @@ const ModuleCard = ({ module, prefersReducedMotion }: ModuleCardProps) => {
       </div>
       <ul className="mt-5 space-y-2 text-left text-sm leading-relaxed text-muted">
         {module.bullets.map((bullet) => (
-          <li key={bullet} className="flex items-start gap-2">
-            <span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />
+          <li key={bullet} className="flex items-start gap-2 transition-transform duration-300 group-hover:translate-x-1">
+            <span className="mt-1 h-1.5 w-1.5 rounded-full bg-gradient-to-br from-primary via-primary/70 to-accent shadow-[0_0_8px_rgba(104,22,24,0.45)] transition-transform duration-300 group-hover:scale-125" aria-hidden="true" />
             <span>{bullet}</span>
           </li>
         ))}

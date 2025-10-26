@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import Section from './Section';
 import Container from './Container';
 import MotionInView from './MotionInView';
@@ -5,6 +6,7 @@ import { fadeInUp, slideInY, staggerContainer } from '../lib/animations';
 
 import Icon from './Icon';
 import { Timer, ShieldCheck, Smile } from 'lucide-react';
+import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion';
 
 const evidences = [
   {
@@ -40,14 +42,33 @@ const evidences = [
 ];
 
 const Why = () => {
+  const prefersReducedMotion = usePrefersReducedMotion();
+
   return (
     <div className="relative bg-gradient-to-b from-surface to-accent/30 py-14 sm:py-16">
       <div className="pointer-events-none absolute inset-0 -z-10">
+        <motion.div
+          aria-hidden="true"
+          className="absolute inset-0 bg-ai-grid opacity-40"
+          animate={
+            prefersReducedMotion
+              ? undefined
+              : { backgroundPosition: ['0% 0%', '100% 0%', '0% 0%'] }
+          }
+          transition={{ duration: 26, repeat: Infinity, ease: 'linear' }}
+          style={{ backgroundSize: '360px 360px, 24px 24px, 24px 24px' }}
+        />
         <div className="absolute left-6 top-16 h-40 w-40 rounded-full bg-primary/10 blur-3xl" />
         <div className="absolute right-10 bottom-10 h-48 w-48 rounded-full bg-accent/30 blur-3xl" />
-        <div className="absolute inset-x-0 top-1/3 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
+        <motion.div
+          aria-hidden="true"
+          className="absolute inset-x-0 top-1/3 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent"
+          initial={{ opacity: 0 }}
+          animate={prefersReducedMotion ? { opacity: 0.45 } : { opacity: [0.2, 0.6, 0.3] }}
+          transition={{ duration: 12, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
+        />
       </div>
-      <Section id="perche-vibeeats" className="relative">
+      <Section id="perche-vibeeats" className="ai-section relative">
         <Container>
           <div className="mx-auto max-w-3xl text-center">
             <MotionInView variants={fadeInUp}>
@@ -63,9 +84,16 @@ const Why = () => {
               <MotionInView
                 key={item.title}
                 variants={slideInY}
-                className="group relative overflow-hidden rounded-3xl border border-accent/30 bg-white p-6 text-left shadow-soft transition-transform duration-300 hover:-translate-y-1"
+                className="group ai-card relative overflow-hidden rounded-3xl border border-accent/30 bg-white/95 p-6 text-left shadow-soft transition-transform duration-300 hover:-translate-y-1 hover:shadow-hover"
               >
                 <span className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden="true" />
+                <motion.span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent"
+                  initial={{ opacity: 0 }}
+                  whileInView={prefersReducedMotion ? { opacity: 0.4 } : { opacity: 0.55 }}
+                  transition={{ duration: 0.8, ease: 'easeOut' }}
+                />
                 <div className="relative flex items-start gap-4">
                   <div className="shrink-0">{item.icon}</div>
                   <div>

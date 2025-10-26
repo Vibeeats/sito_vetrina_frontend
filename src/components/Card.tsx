@@ -15,7 +15,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
     <motion.div
       ref={ref}
       className={cn(
-        'group relative flex h-full flex-col rounded-3xl border border-accent/30 bg-white p-6 shadow-soft transition-shadow duration-300 will-change-transform',
+        'group ai-card relative flex h-full flex-col overflow-hidden rounded-3xl border border-accent/25 bg-white/95 p-6 shadow-soft transition-shadow duration-300 will-change-transform',
         className
       )}
       {...rest}

@@ -28,7 +28,33 @@ const Hero = () => {
   }, [prefersReducedMotion]);
 
   return (
-    <Section id="home" className="relative overflow-hidden bg-hero-gradient pt-28">
+    <Section id="home" className="ai-section relative overflow-hidden bg-hero-gradient pt-28">
+      <div className="pointer-events-none absolute inset-0 -z-20">
+        <motion.div
+          aria-hidden="true"
+          className="absolute inset-0 bg-ai-grid opacity-50"
+          animate={
+            prefersReducedMotion
+              ? undefined
+              : { backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'] }
+          }
+          transition={{ duration: 32, repeat: Infinity, ease: 'linear' }}
+          style={{ backgroundSize: '360px 360px, 24px 24px, 24px 24px' }}
+        />
+        <motion.div
+          aria-hidden="true"
+          className="absolute inset-x-0 top-1/3 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent"
+          initial={{ opacity: 0, scaleX: 0 }}
+          animate={prefersReducedMotion ? { opacity: 0.4, scaleX: 1 } : { opacity: [0, 0.6, 0.4], scaleX: [0.2, 1, 0.85] }}
+          transition={{ duration: 12, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
+        />
+        <motion.div
+          aria-hidden="true"
+          className="absolute left-1/2 top-40 h-80 w-80 -translate-x-1/2 rounded-full bg-gradient-to-r from-primary/20 via-accent/40 to-primary/10 blur-3xl"
+          animate={prefersReducedMotion ? undefined : { scale: [0.9, 1.05, 0.95], opacity: [0.5, 0.8, 0.6] }}
+          transition={{ duration: 16, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
+        />
+      </div>
       <div className="pointer-events-none absolute inset-0 -z-10 opacity-70">
         <motion.div
           className="absolute -left-32 top-24 h-64 w-64 rounded-full bg-primary/25 blur-3xl"
@@ -43,6 +69,17 @@ const Hero = () => {
       </div>
 
       <Container className="relative">
+        <motion.div
+          aria-hidden="true"
+          className="absolute left-1/2 top-10 h-24 w-72 -translate-x-1/2 rounded-full border border-accent/40"
+          style={{ rotateX: prefersReducedMotion ? 0 : 12 }}
+          animate={
+            prefersReducedMotion
+              ? undefined
+              : { scaleX: [0.9, 1.05, 0.95], opacity: [0.25, 0.45, 0.3] }
+          }
+          transition={{ duration: 18, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }}
+        />
         <MotionInView variants={staggerContainer} className="flex flex-col items-center text-center pt-16 sm:pt-20">
           <MotionInView variants={fadeInUp} className="rounded-full border border-primary/40 bg-primary/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
             VibeEats

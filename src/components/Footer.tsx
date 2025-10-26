@@ -1,6 +1,8 @@
 import { MouseEvent } from 'react';
+import { motion } from 'framer-motion';
 import Container from './Container';
 import { scrollToId } from '../utils/scrollTo';
+import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion';
 
 const links = [
   { id: 'home', label: 'Home' },
@@ -13,6 +15,7 @@ const links = [
 
 const Footer = () => {
   const year = new Date().getFullYear();
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   const handleClick = (id: string) => (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
@@ -20,8 +23,26 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative bg-gradient-to-r from-secondary via-secondary/95 to-secondary text-surface">
-      <Container className="section-padding flex flex-col gap-10 md:flex-row md:items-center md:justify-between">
+    <footer className="relative overflow-hidden bg-gradient-to-r from-secondary via-secondary/95 to-secondary text-surface">
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 bg-ai-grid opacity-[0.32]"
+        animate={
+          prefersReducedMotion
+            ? undefined
+            : { backgroundPosition: ['0% 0%', '100% 0%', '0% 0%'] }
+        }
+        transition={{ duration: 36, repeat: Infinity, ease: 'linear' }}
+        style={{ backgroundSize: '420px 420px, 26px 26px, 26px 26px' }}
+      />
+      <motion.div
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.5 }}
+        transition={{ duration: 1, ease: 'easeOut' }}
+      />
+      <Container className="ai-section section-padding flex flex-col gap-10 md:flex-row md:items-center md:justify-between">
         <div className="space-y-3">
           <p className="text-lg font-semibold text-surface">VibeEats</p>
           <p className="max-w-md text-sm text-surface/80">

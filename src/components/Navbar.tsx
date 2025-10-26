@@ -87,10 +87,44 @@ const Navbar = () => {
       variants={fadeInUp}
       transition={{ duration: 0.4, ease: 'easeOut' }}
       className={cn(
-        'fixed inset-x-0 top-0 z-50 border-b border-accent/40 bg-surface/90 backdrop-blur-xl transition-shadow duration-300',
+        'fixed inset-x-0 top-0 z-50 overflow-hidden border-b border-accent/40 bg-surface/90 backdrop-blur-2xl transition-shadow duration-300',
         isScrolled ? 'shadow-lg shadow-primary/20' : ''
       )}
     >
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-surface via-white/90 to-surface/80" />
+        <motion.div
+          className="absolute -top-24 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-primary/40 blur-[100px] opacity-95"
+          animate={
+            prefersReducedMotion ? undefined : { x: ['-35%', '35%', '-35%'], y: ['-15%', '20%', '-15%'] }
+          }
+          transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute top-1/2 left-0 h-32 w-32 -translate-y-1/2 rounded-full bg-accent/90 blur-[70px] opacity-90"
+          animate={
+            prefersReducedMotion ? undefined : { x: ['-10%', '550%', '-10%'], scale: [0.9, 1.1, 0.9] }
+          }
+          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute inset-y-[-35%] left-[-25%] w-[65%] bg-gradient-to-r from-primary/0 via-primary/45 to-primary/0 opacity-75 blur-xl"
+          animate={prefersReducedMotion ? undefined : { x: ['-20%', '125%', '-20%'] }}
+          transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute inset-y-[-40%] left-1/2 h-[220%] w-[24%] -translate-x-1/2 rounded-full bg-gradient-to-b from-white/0 via-white/65 to-white/10 opacity-80 blur-3xl"
+          animate={prefersReducedMotion ? undefined : { rotate: [-12, 12, -12] }}
+          transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      </div>
+      <motion.div
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 -z-10 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent"
+        initial={{ scaleX: 0 }}
+        animate={prefersReducedMotion ? { scaleX: 1 } : { scaleX: [0, 1] }}
+        transition={{ duration: 1.2, ease: 'easeOut' }}
+      />
       <div className="mx-auto flex w-full max-w-content items-center justify-between px-4 py-6 sm:px-8">
         <a href="#home" className="flex items-center gap-4" onClick={handleNavigate('home')} aria-label="Home VibeEats">
           <img src={logo} alt="Logo VibeEats" className="h-12 w-auto sm:h-14" />
@@ -105,7 +139,7 @@ const Navbar = () => {
                 href={`#${item.id}`}
                 onClick={handleNavigate(item.id)}
                 className={cn(
-                  'relative overflow-hidden rounded-full px-4 py-2 text-sm font-medium transition-colors xl:px-6 xl:py-3',
+                  'relative overflow-hidden rounded-full px-4 py-2 text-sm font-medium backdrop-blur-sm transition-colors xl:px-6 xl:py-3',
                   isActive ? 'text-primary' : 'text-muted hover:text-secondary'
                 )}
                 whileHover={{ scale: prefersReducedMotion ? 1 : 1.02 }}
@@ -163,7 +197,7 @@ const Navbar = () => {
               transition={{ duration: 0.25, ease: 'easeOut' }}
               className="fixed inset-x-4 top-[88px] z-50 lg:hidden"
             >
-              <div className="rounded-3xl border border-accent/40 bg-gradient-to-br from-surface via-white to-surface/90 p-5 shadow-hover">
+              <div className="ai-section rounded-3xl border border-accent/40 bg-gradient-to-br from-surface via-white to-surface/90 p-5 shadow-hover">
                 <div className="mb-4 flex items-center justify-between">
                   <span className="text-xs font-semibold uppercase tracking-[0.3em] text-muted">Menu</span>
                   <button

@@ -62,3 +62,23 @@ export const blobTransition: Transition = {
   repeatType: 'reverse',
   ease: 'easeInOut'
 };
+
+export const perspectiveFade: Variants = {
+  hidden: { opacity: 0, rotateX: 12, y: 28 },
+  show: {
+    opacity: 1,
+    rotateX: 0,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
+  }
+};
+
+export const glowIn: Variants = {
+  hidden: { opacity: 0, scale: 0.96, filter: 'blur(8px)' },
+  show: {
+    opacity: 1,
+    scale: 1,
+    filter: 'blur(0px)',
+    transition: { duration: 0.55, ease: 'easeOut' }
+  }
+};

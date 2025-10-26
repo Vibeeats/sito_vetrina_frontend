@@ -1,12 +1,27 @@
+import { motion } from 'framer-motion';
 import Section from './Section';
 import Container from './Container';
 import Button from './Button';
 import MotionInView from './MotionInView';
 import { fadeInUp, scaleIn } from '../lib/animations';
+import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion';
 
 const Contact = () => {
+  const prefersReducedMotion = usePrefersReducedMotion();
+
   return (
-    <Section id="contatti">
+    <Section id="contatti" className="ai-section relative">
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 bg-ai-grid opacity-40"
+        animate={
+          prefersReducedMotion
+            ? undefined
+            : { backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }
+        }
+        transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
+        style={{ backgroundSize: '340px 340px, 22px 22px, 22px 22px' }}
+      />
       <Container>
         <div className="mx-auto max-w-3xl text-center">
           <MotionInView variants={fadeInUp}>
@@ -19,8 +34,15 @@ const Contact = () => {
 
         <MotionInView
           variants={scaleIn}
-          className="mx-auto mt-12 max-w-2xl rounded-3xl border border-accent/30 bg-white p-8 text-center shadow-soft"
+          className="ai-card mx-auto mt-12 max-w-2xl overflow-hidden rounded-3xl border border-accent/30 bg-white/95 p-8 text-center shadow-soft backdrop-blur-sm"
         >
+          <motion.span
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-10 top-8 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 0.45 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+          />
           <p className="text-sm leading-relaxed text-muted">
             Preferiamo ascoltarti direttamente per costruire una demo su misura: inviaci un’email e raccontaci cosa vuoi
             migliorare nella tua esperienza ristorante.
